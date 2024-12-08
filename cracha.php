@@ -4,15 +4,13 @@ require 'vendor/autoload.php';
 
 session_start();
 
-// Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit();
 }
 
-require 'processos/db_connect.php'; // Inclui o arquivo de conexão com banco
+require 'processos/db_connect.php'; 
 
-// Busca informações do usuário no banco de dados
 $sql = "SELECT username, email, codigo_unico FROM users WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$_SESSION['usuario_id']]);
@@ -22,7 +20,6 @@ if (!$users) {
     die('Erro: Usuário não encontrado.');
 }
 
-// Configurações do QR Code
 $options = new QROptions([
     'outputType' => QRCode::OUTPUT_IMAGE_PNG,
     'eccLevel' => QRCode::ECC_L,
@@ -30,7 +27,6 @@ $options = new QROptions([
     'scale' => 128,
 ]);
 
-// Gera o QR Code com o código único do usuário
 $qrcode = (new QRCode($options))->render($users['codigo_unico']);
 ?>
 

@@ -1,19 +1,16 @@
 <?php
 session_start();
-use chillerlan\QRCode\{QRCode, QROptions};
 require 'vendor/autoload.php';
 require 'processos/noticias.php';
 require 'processos/db_connect.php';
 require 'processos/pendencias.php';
+require 'processos/mensagens.php';
 
-
-// Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit();
 }
 
-// Recupera informações do usuário logado
 $sql = "SELECT email,username, codigo_unico FROM users WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$_SESSION['usuario_id']]);
@@ -23,10 +20,6 @@ if (!$usuario) {
     die('Erro: Usuário não encontrado.');
 }
 
-// Gera um QR Code vinculado ao código único
-$urlF = "https://example.com/validar.php?codigo=" . $usuario['codigo_unico'];
-$qrcode = (new QRCode)->render($urlF);
-
 $data_inicio_semana = date('Y-m-d', strtotime('monday this week'));
 $data_fim_semana = date('Y-m-d', strtotime('sunday this week'));
 
@@ -35,7 +28,6 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$_SESSION['usuario_id'], $data_inicio_semana, $data_fim_semana]);
 $presencas = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-// Cria um array de dias da semana
 $dias_semana = [];
 for ($i = 0; $i < 7; $i++) {
     $dias_semana[] = date('Y-m-d', strtotime("monday this week +$i days"));
@@ -85,10 +77,26 @@ for ($i = 0; $i < 7; $i++) {
                 <h3>Mensagens:</h3>
                 <div class="card-interno mensagen-interna">
                     <table class="tabela">
-                        <tbody>
+                        <thead>
                             <tr>
-                                <td>Nenhuma mensagem</td>
+                                <th>Data</th>
+                                <th>Mensagem</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (count($mensagens) > 0): ?>
+                                <?php foreach ($mensagens as $mensagem): ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($mensagem['data_criacao']))); ?>
+                                        </td>
+                                        <td><?php echo htmlspecialchars($mensagem['mensagem']); ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="2">Nenhuma mensagem disponível.</td>
+                                </tr>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>

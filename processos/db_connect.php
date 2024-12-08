@@ -7,23 +7,19 @@ $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;charset=$charset";
 $options = [
-     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-     PDO::ATTR_EMULATE_PREPARES   => false,
+     PDO::ATTR_EMULATE_PREPARES => false,
 ];
 
 try {
-    // Conexão inicial sem banco de dados para criar o banco, caso não exista
      $pdo = new PDO($dsn, $user, $pass, $options);
 
-    // Cria o banco de dados se não existir
      $queryCreateDB = "CREATE DATABASE IF NOT EXISTS $db CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci";
      $pdo->exec($queryCreateDB);
 
-    // Conecta ao banco recém-criado
      $pdo->exec("USE $db");
 
-    // Criação da tabela 'users'
      $queryUsers = "
           CREATE TABLE IF NOT EXISTS users (
                id INT NOT NULL AUTO_INCREMENT,
@@ -38,7 +34,6 @@ try {
      ";
      $pdo->exec($queryUsers);
 
-    // Criação da tabela 'presencas'
      $queryPresencas = "
           CREATE TABLE IF NOT EXISTS presencas (
                id INT NOT NULL AUTO_INCREMENT,
@@ -50,6 +45,41 @@ try {
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
      ";
      $pdo->exec($queryPresencas);
+
+     $queryNoticias = "
+          CREATE TABLE IF NOT EXISTS noticias (
+               id INT NOT NULL AUTO_INCREMENT,
+               assunto VARCHAR(255) NOT NULL,
+               detalhe TEXT NOT NULL,
+               data DATE NOT NULL,
+               PRIMARY KEY (id)
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+     ";
+     $pdo->exec($queryNoticias);
+
+     $queryPendencias = "
+          CREATE TABLE IF NOT EXISTS pendencias (
+               id INT NOT NULL AUTO_INCREMENT,
+               user_id INT NOT NULL,
+               descricao VARCHAR(255) NOT NULL,
+               status ENUM('pendente', 'concluida') DEFAULT 'pendente',
+               PRIMARY KEY (id),
+               FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+     ";
+     $pdo->exec($queryPendencias);
+
+     $queryMensagens = "
+          CREATE TABLE IF NOT EXISTS mensagens (
+               id INT NOT NULL AUTO_INCREMENT,
+               user_id INT NOT NULL,
+               mensagem TEXT NOT NULL,
+               data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+               PRIMARY KEY (id),
+               FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+     ";
+     $pdo->exec($queryMensagens);
 
 } catch (PDOException $e) {
      die("Erro ao conectar ou configurar o banco de dados: " . $e->getMessage());

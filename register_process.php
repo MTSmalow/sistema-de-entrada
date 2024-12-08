@@ -1,7 +1,6 @@
 <?php
 require 'processos/db_connect.php';
 
-// Verifica se os campos obrigatórios foram enviados
 if (!isset($_POST['username'], $_POST['email'], $_POST['password'])) {
     header('Location: register.php?error=Campos obrigatórios faltando.');
     exit();
@@ -11,7 +10,6 @@ $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-// Verifica se o email já existe
 $sql = "SELECT * FROM users WHERE email = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$email]);
@@ -22,7 +20,6 @@ if ($user) {
     exit();
 }
 
-// Função para gerar um código único de 5 dígitos
 function gerarCodigoUnico($pdo) {
     do {
         // Gera um código aleatório de 5 dígitos
@@ -33,7 +30,7 @@ function gerarCodigoUnico($pdo) {
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$codigo]);
         $exists = $stmt->fetch();
-    } while ($exists); // Repete até encontrar um código único
+    } while ($exists); 
 
     return $codigo;
 }
@@ -50,6 +47,6 @@ $sql = "INSERT INTO users (username, email, hash_username_password, hash_email_p
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$username, $email, $hash_username_password, $hash_email_password, $codigo_unico]);
 
-header('Location: login.php'); // Redireciona para a página de login
+header('Location: login.php');
 exit();
 ?>
