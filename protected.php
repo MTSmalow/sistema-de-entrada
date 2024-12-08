@@ -52,30 +52,32 @@ for ($i = 0; $i < 7; $i++) {
         <h3>Bem-vindo, <?php echo htmlspecialchars($usuario['username']); ?>!</h3>
         <div class="card_text">
             <p>Seu código: <strong><?php echo htmlspecialchars($usuario['codigo_unico']); ?></strong></p>
+            <a href="cracha.php">Cracha</a>
             <p>Email: <?php echo htmlspecialchars($usuario['email']); ?></p>
-            <a href="cracha.php">cracha</a>
         </div>
-
-        <label class="theme">
-            <input class="input" type="checkbox" id="theme-toggle" />
-            <svg width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-                stroke="currentColor" height="24" fill="none" class="icon icon-sun">
-                <circle r="5" cy="12" cx="12"></circle>
-                <line y2="3" y1="1" x2="12" x1="12"></line>
-                <line y2="23" y1="21" x2="12" x1="12"></line>
-                <line y2="5.64" y1="4.22" x2="5.64" x1="4.22"></line>
-                <line y2="19.78" y1="18.36" x2="19.78" x1="18.36"></line>
-                <line y2="12" y1="12" x2="3" x1="1"></line>
-                <line y2="12" y1="12" x2="23" x1="21"></line>
-                <line y2="18.36" y1="19.78" x2="5.64" x1="4.22"></line>
-                <line y2="4.22" y1="5.64" x2="19.78" x1="18.36"></line>
-            </svg>
-            <svg viewBox="0 0 24 24" class="icon icon-moon">
-                <path
-                    d="m12.3 4.9c.4-.2.6-.7.5-1.1s-.6-.8-1.1-.8c-4.9.1-8.7 4.1-8.7 9 0 5 4 9 9 9 3.8 0 7.1-2.4 8.4-5.9.2-.4 0-.9-.4-1.2s-.9-.2-1.2.1c-1 .9-2.3 1.4-3.7 1.4-3.1 0-5.7-2.5-5.7-5.7 0-1.9 1.1-3.8 2.9-4.8zm2.8 12.5c.5 0 1 0 1.4-.1-1.2 1.1-2.8 1.7-4.5 1.7-3.9 0-7-3.1-7-7 0-2.5 1.4-4.8 3.5-6-.7 1.1-1 2.4-1 3.8-.1 4.2 3.4 7.6 7.6 7.6z">
-                </path>
-            </svg>
-        </label>
+        <div>
+            <label class="theme">
+                <input class="input" type="checkbox" id="theme-toggle" />
+                <svg width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
+                    stroke="currentColor" height="24" fill="none" class="icon icon-sun">
+                    <circle r="5" cy="12" cx="12"></circle>
+                    <line y2="3" y1="1" x2="12" x1="12"></line>
+                    <line y2="23" y1="21" x2="12" x1="12"></line>
+                    <line y2="5.64" y1="4.22" x2="5.64" x1="4.22"></line>
+                    <line y2="19.78" y1="18.36" x2="19.78" x1="18.36"></line>
+                    <line y2="12" y1="12" x2="3" x1="1"></line>
+                    <line y2="12" y1="12" x2="23" x1="21"></line>
+                    <line y2="18.36" y1="19.78" x2="5.64" x1="4.22"></line>
+                    <line y2="4.22" y1="5.64" x2="19.78" x1="18.36"></line>
+                </svg>
+                <svg viewBox="0 0 24 24" class="icon icon-moon">
+                    <path
+                        d="m12.3 4.9c.4-.2.6-.7.5-1.1s-.6-.8-1.1-.8c-4.9.1-8.7 4.1-8.7 9 0 5 4 9 9 9 3.8 0 7.1-2.4 8.4-5.9.2-.4 0-.9-.4-1.2s-.9-.2-1.2.1c-1 .9-2.3 1.4-3.7 1.4-3.1 0-5.7-2.5-5.7-5.7 0-1.9 1.1-3.8 2.9-4.8zm2.8 12.5c.5 0 1 0 1.4-.1-1.2 1.1-2.8 1.7-4.5 1.7-3.9 0-7-3.1-7-7 0-2.5 1.4-4.8 3.5-6-.7 1.1-1 2.4-1 3.8-.1 4.2 3.4 7.6 7.6 7.6z">
+                    </path>
+                </svg>
+            </label>
+        </div>
+        <a class="sair" href="logout.php">Sair</a>
     </div>
 
     <div class="contend">
@@ -94,34 +96,32 @@ for ($i = 0; $i < 7; $i++) {
             </div>
         </div>
 
-        <div>
-            <div class="card mensagens">
-                <h3>Mensagens:</h3>
-                <div class="card-interno mensagen-interna">
-                    <table class="tabela">
-                        <thead>
-                            <tr>
-                                <th>Data</th>
-                                <th>Mensagem</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (count($mensagens) > 0): ?>
-                                <?php foreach ($mensagens as $mensagem): ?>
-                                    <tr>
-                                        <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($mensagem['data_criacao']))); ?>
-                                        </td>
-                                        <td><?php echo htmlspecialchars($mensagem['mensagem']); ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
+        <div class="card mensagens">
+            <h3>Mensagens:</h3>
+            <div class="card-interno mensagen-interna">
+                <table class="tabela">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Mensagem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (count($mensagens) > 0): ?>
+                            <?php foreach ($mensagens as $mensagem): ?>
                                 <tr>
-                                    <td colspan="2">Nenhuma mensagem disponível.</td>
+                                    <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($mensagem['data_criacao']))); ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($mensagem['mensagem']); ?></td>
                                 </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="2">Nenhuma mensagem disponível.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

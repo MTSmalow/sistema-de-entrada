@@ -32,6 +32,9 @@ body.dark-mode .tabela tr:hover {
     background-color: #3a3a3a;
     transition: background-color 0.3s ease;
 }
+body.dark-mode .card-content{
+    background-color: var(--darkreader-bg--container-color, #181a1b);
+}
 
 .theme {
     position: relative;
@@ -40,7 +43,7 @@ body.dark-mode .tabela tr:hover {
     align-items: center;
     width: 40px;
     border-radius: 100%;
-    margin: 20px auto;
+    margin: 30px auto;
     cursor: pointer;
 }
 
