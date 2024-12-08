@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+    display: flex;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.checklist {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc; /* Cinza padrão */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.circle.present {
+    background-color: #4caf50; /* Verde para presença */
+    color: white;
+}
+
+.day-name {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+.qrcode{
+    width: 200px;
+}
+.card{
+    box-shadow: 0 6px 22px hsla(230, 10%, 5%, 0.5);
+    border-radius: 10px;
+    width: 100%;
+    margin: 10px;
+    padding: 5px;
+}
+.card-mask {
+    height: 100px;
+    background-color: var(--gray-color);
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    }
+    
+.card-mask img {
+    width: 95px;
+}
+.card_text{
+    font-size: 12px;
+}
+.contend{
+    flex-wrap: wrap;
+}
+.card-interno{
+    box-shadow: 0 6px 22px hsla(230, 10%, 5%, 0.5);
+    border-radius: 10px;
+    margin: 10px;
+    padding: 5px;
+    font-size: 12px;
+    height: 120px;
+}
+.mensagen-interna{
+    height: 300px;
+}
+.presenca{
+    width: 36.111111111111114vw;
+    align-self: baseline;
+}
+.principal{
+    width: 400px;
+    height: 300px;
+}
+.mensagens{
+    width: 36.111111111111114vw;
+    align-self: baseline;
+}
+.pendencias{
+    width: 41.666666666666664vw;
+}
+.noticias{
+    height: 300px;
+}
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.tabela th, 
+.tabela td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.tabela th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tabela tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.tabela tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+.pagination {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+}
+
+.pagination a {
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
