@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 20px;
-    display: flex;
-}
-
 h2 {
     margin-bottom: 20px;
 }
@@ -107,23 +100,23 @@ h2 {
 
 .tabela th, 
 .tabela td {
-    border: 1px solid #ccc;
+    border: 1px solid #dfdcdc;
     padding: 8px;
     text-align: left;
 }
 
 .tabela th {
-    background-color: #f4f4f4;
+    background-color: #d8d8d8;
     font-weight: bold;
     text-align: center;
 }
 
 .tabela tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #e2e1e1;
 }
 
 .tabela tr:hover {
-    background-color: #f1f1f1;
+    background-color: #c9c6c6;
     transition: background-color 0.3s ease;
 }
 .pagination {

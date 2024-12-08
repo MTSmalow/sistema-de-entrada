@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
 }
@@ -13,7 +13,7 @@ require 'processos/db_connect.php';
 
 $sql = "SELECT username, email, codigo_unico FROM users WHERE id = ?";
 $stmt = $pdo->prepare($sql);
-$stmt->execute([$_SESSION['usuario_id']]);
+$stmt->execute([$_SESSION['id']]);
 $users = $stmt->fetch();
 
 if (!$users) {
@@ -32,15 +32,13 @@ $qrcode = (new QRCode($options))->render($users['codigo_unico']);
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <link rel="stylesheet" href="css/thema.css">
     <link rel="stylesheet" href="css/cracha.css" />
     <title>Cracha - <?php echo htmlspecialchars($users['username']); ?></title>
 </head>
-
 <body>
     <div class="container">
         <div class="card-content">
@@ -78,6 +76,6 @@ $qrcode = (new QRCode($options))->render($users['codigo_unico']);
             </div>
         </div>
     </div>
+    <script src="js/thema.js"></script>
 </body>
-
 </html>

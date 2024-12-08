@@ -3,7 +3,7 @@ require 'processos/db_connect.php';
 session_start();
 
 // Verifica se o usuário está logado
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login.php');
     exit();
 }

@@ -24,7 +24,7 @@ $user = $stmt->fetch();
 
 if ($user) {
     // Se o usuário for encontrado, inicia a sessão
-    $_SESSION['username'] = $user['username'];
+    $_SESSION['id'] = $user['id'];
     header('Location: protected.php');
     exit();
 } else {
