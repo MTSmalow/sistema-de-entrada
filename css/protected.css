@@ -19,14 +19,14 @@ h2 {
     width: 2.7777777777777777vw;
     height: 2.7777777777777777vw;
     border-radius: 50%;
-    background-color: #ccc; /* Cinza padrão */
+    background-color: #ccc; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .circle.present {
-    background-color: #4caf50; /* Verde para presença */
+    background-color: #4caf50;
     color: white;
 }
 
@@ -52,8 +52,7 @@ h2 {
     overflow: hidden;
     display: flex;
     justify-content: center;
-    }
-    
+}
 .card-mask img {
     width: 6.597222222222222vw;
     height: 6.597222222222222vw;
